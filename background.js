@@ -9,7 +9,7 @@ function clickSpanPeriodically() {
 }
 
 // Periodisches Ausführen der Klickfunktion alle 20 Sekunden
-setInterval(clickSpanPeriodically, 5000);
+setInterval(clickSpanPeriodically, 10000);
 
 // Funktion zum Klicken auf das definierte Span-Element basierend auf dem empfangenen Index
 function clickSpanAtIndex(index) {
