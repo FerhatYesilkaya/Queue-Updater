@@ -14,17 +14,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     const dropdown = document.getElementById('spanDropdown');
     spans.forEach((spanText, index) => {
       const option = document.createElement('option');
-      option.value = spanText; // Änderung: Der Wert ist jetzt der Text des Span-Elements
+      option.value = spanText; // Der Wert ist jetzt der Text des Span-Elements
       option.textContent = spanText;
       dropdown.appendChild(option);
     });
 
     // Load selected option from storage
-    chrome.storage.sync.get('selectedDropDownOption', (data) => { // Änderung: 'selectedDropDownOption' verwenden
+    chrome.storage.sync.get('selectedDropDownOption', (data) => { // 'selectedDropDownOption' verwenden
       const selectedOption = data.selectedDropDownOption;
       if (selectedOption !== undefined) {
-        dropdown.value = selectedOption;
-        clickSpanWithText(selectedOption); // Änderung: Hier wird das Textelement übergeben
+        dropdown.value = selectedOption.text;
+        clickSpanWithText(selectedOption.text); // Hier wird das Textelement übergeben
       }
     });
   });
@@ -32,8 +32,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Event-Handler für die Änderung des Dropdown-Menüs
   document.getElementById('spanDropdown').addEventListener('change', (event) => {
     const selectedText = event.target.value; // Ausgewählter Text aus dem Dropdown-Menü
-    chrome.storage.sync.set({ 'selectedDropDownOption': selectedText }); // Speichere den ausgewählten Text in der Storage
-    console.log(selectedText)
+    const selectedIndex = event.target.selectedIndex; // Index der ausgewählten Option
+    chrome.storage.sync.set({ 'selectedDropDownOption': { text: selectedText, index: selectedIndex } }); // Speichere den ausgewählten Text und Index in der Storage
     clickSpanWithText(selectedText); // Ändere das ausgewählte Span-Element entsprechend der neuen Auswahl
   });
 });
@@ -44,21 +44,21 @@ function populateDropdownWithSpanClass() {
   return spans;
 }
 
-function clickSpanWithText(text) { // Änderung: Diese Funktion wird aufgerufen, um das Span-Element mit dem angegebenen Text zu klicken
+function clickSpanWithText(text) { // Diese Funktion wird aufgerufen, um das Span-Element mit dem angegebenen Text zu klicken
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     const tabId = tabs[0].id;
     chrome.scripting.executeScript({
       target: { tabId: tabId, allFrames: true },
-      function: (text) => { // Änderung: Hier wird der Text übergeben
+      function: (text) => { // Hier wird der Text übergeben
         const spans = document.querySelectorAll(`span.virtualAutocompleteOptionText`);
         const spanToClick = Array.from(spans).find(span => span.textContent === text);
         if (spanToClick) {
-          spanToClick.click(); // Änderung: Klicke auf das Span-Element mit dem angegebenen Text
+          spanToClick.click(); // Klicke auf das Span-Element mit dem angegebenen Text
         } else {
           console.error('No span element found with the specified text.');
         }
       },
-      args: [text] // Änderung: Hier wird der Text als Argument übergeben
+      args: [text] // Hier wird der Text als Argument übergeben
     });
   });
 }

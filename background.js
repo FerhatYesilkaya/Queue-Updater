@@ -1,9 +1,9 @@
-// Funktion zum periodischen Klicken auf das Span-Element
 function clickSpanPeriodically() {
-  chrome.storage.sync.get('selectedOption', (data) => {
-    const selectedOption = data.selectedOption;
+  chrome.storage.sync.get('selectedDropDownOption', (data) => { // Ändern Sie den Key auf 'selectedDropDownOption'
+    const selectedOption = data.selectedDropDownOption;
     if (selectedOption !== undefined) {
-      clickSpanAtIndex(selectedOption); // Klicke das Span-Element mit dem ausgewählten Index
+      const selectedIndex = selectedOption.index; // Ändern Sie den Namen des Indexattributs entsprechend Ihrer Speicherstruktur
+      clickSpanAtIndex(selectedIndex); // Rufen Sie die Funktion zum Klicken auf das Span-Element mit dem ausgewählten Index auf
     }
   });
 }
