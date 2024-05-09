@@ -1,20 +1,28 @@
-let currentSelectedView;
-var timer = 10000;
+chrome.storage.sync.set({ "Timer": 10000 });
 
 function clickSpanPeriodically() {
   chrome.storage.sync.get('selectedDropDownOption', (data) => { // Ändern Sie den Key auf 'selectedDropDownOption'
     const selectedOption = data.selectedDropDownOption;
-    console.log(timer);
-    console.log('Text des Span-Elements3:', currentSelectedView);
     if (selectedOption !== undefined) {
-        const selectedIndex = selectedOption.index; // Ändern Sie den Namen des Indexattributs entsprechend Ihrer Speicherstruktur
-        clickSpanAtIndex(selectedIndex); // Rufen Sie die Funktion zum Klicken auf das Span-Element mit dem ausgewählten Index auf
+      chrome.storage.sync.get("currentSelectedView", function(result) {
+        if(result.currentSelectedView === data.selectedDropDownOption.text){
+          const selectedIndex = selectedOption.index; // Ändern Sie den Namen des Indexattributs entsprechend Ihrer Speicherstruktur
+          clickSpanAtIndex(selectedIndex); // Rufen Sie die Funktion zum Klicken auf das Span-Element mit dem ausgewählten Index auf
+        }
+      });
     }
   });
 }
 
 // Periodisches Ausführen der Klickfunktion alle 10 Sekunden
-setInterval(clickSpanPeriodically, timer);
+
+chrome.storage.sync.get("Timer", function(result) {
+  setInterval(clickSpanPeriodically, result.Timer);
+});
+
+chrome.storage.sync.get("Timer", function(result) {
+  setInterval(getTextFromSpanPeriodically, result.Timer-1000);
+});
 
 // Funktion zum Klicken auf das definierte Span-Element basierend auf dem empfangenen Index
 function clickSpanAtIndex(index) {
@@ -49,11 +57,8 @@ function getTextFromSpanPeriodically() {
           if (spans.length > 0) {
             const spanText = spans[0].textContent;
             // Hier können Sie den Text des Span-Elements verwenden oder weitere Verarbeitungen durchführen
-            currentSelectedView = spanText;
-            console.log(currentSelectedView);
-            console.log(timer);
+            chrome.storage.sync.set({ "currentSelectedView": spanText });
           } else {
-            currentSelectedView = "Fehler";
             console.error('Kein Span-Element mit der angegebenen Klasse gefunden.');
           }
         }
@@ -61,6 +66,3 @@ function getTextFromSpanPeriodically() {
     });
   });
 }
-
-// Periodisches Ausführen der Funktion alle 10 Sekunden
-setInterval(getTextFromSpanPeriodically, (timer-100));

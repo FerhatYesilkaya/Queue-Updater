@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const selectedOption = data.selectedDropDownOption;
       if (selectedOption !== undefined) {
         dropdown.value = selectedOption.text;
-        clickSpanWithText(selectedOption.text); // Hier wird das Textelement übergeben
+       // clickSpanWithText(selectedOption.text); // Hier wird das Textelement übergeben
       }
     });
   });
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const selectedText = event.target.value; // Ausgewählter Text aus dem Dropdown-Menü
     const selectedIndex = event.target.selectedIndex; // Index der ausgewählten Option
     chrome.storage.sync.set({ 'selectedDropDownOption': { text: selectedText, index: selectedIndex } }); // Speichere den ausgewählten Text und Index in der Storage
-    clickSpanWithText(selectedText); // Ändere das ausgewählte Span-Element entsprechend der neuen Auswahl
+    //clickSpanWithText(selectedText); // Ändere das ausgewählte Span-Element entsprechend der neuen Auswahl
   });
 });
 
