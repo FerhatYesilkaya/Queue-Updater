@@ -15,9 +15,12 @@ Der Queue-Updater ist eine Google Chrome Erweiterung und aktualisiert die Queue 
 
 In der entpackten Datei ist eine weitere Datei (config.ini), mit dem ihr zwei Parameter anpassen könnt:
 
-- default_queue --> Damit könnt ihr angeben, welche Queue immer neu geladen werden soll. Durch die PopUp-Ansicht kann man auch zwar die Einstellung vornehmen, aber diese Einstellung greift nur bis zum nächsten Neustart des Rechners.
-- refresh_time_in_minutes --> Hier könnt ihr angeben, wie oft die Queue in Minuten aktualisiert werden soll.
+- default_queue
 
-Feel free to customize these parameters according to your preferences.
+Damit könnt ihr angeben, welche Queue immer neu geladen werden soll. Durch die PopUp-Ansicht kann man auch zwar die Einstellung vornehmen, aber diese Einstellung greift nur bis zum nächsten Neustart des Rechners.
 
-**Hinweis:** Dieses README setzt grundlegende Kenntnisse über Google Chrome-Erweiterungen und Dateiverwaltung auf Ihrem Computer voraus. Bei Problemen können Sie sich bitte an die offizielle Google Chrome-Dokumentation wenden oder Unterstützung aus der Community suchen.
+- refresh_time_in_minutes
+
+Hier könnt ihr angeben, wie oft die Queue in Minuten aktualisiert werden soll.
+
+Bei Fragen gerne eine Nachricht per Google Chat.
