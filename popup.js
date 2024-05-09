@@ -1,18 +1,5 @@
 document.addEventListener('DOMContentLoaded', async () => {
-  let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-
-  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-    var currentUrl = tabs[0].url;
-    var allowedUrl = "https://rexis.lightning.force.com"; // Hier die erlaubte URL eintragen
-    
-    var popupContent = document.getElementById("popup-content");
-
-    if (currentUrl.startsWith(allowedUrl)) {
-        popupContent.innerHTML = "<label>Wählen Sie eine Queue aus:</label><select id='spanDropdown'></select>";
-    } else {
-        popupContent.innerHTML = "<p class='error'>Queue-Ansicht öffnen!</p>";
-    }
-});
+let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
 
 chrome.scripting.executeScript({
@@ -36,21 +23,20 @@ chrome.scripting.executeScript({
   // Load selected option from storage
   chrome.storage.sync.get('selectedDropDownOption', (data) => { // 'selectedDropDownOption' verwenden
     const selectedOption = data.selectedDropDownOption;
-    if (selectedOption !== undefined) {
-      dropdown.value = selectedOption.text;
-    } else {
+
       getDataFromIniFile("configurable_parameters",'default_queue', function(value) {
+        console.log(value);
         dropdown.value = value;
       });
-    }
+   
   });
 });
   // Event-Handler für die Änderung des Dropdown-Menüs
   document.getElementById('spanDropdown').addEventListener('change', (event) => {
+    console.log("Änderung erkannt");
     const selectedText = event.target.value; // Ausgewählter Text aus dem Dropdown-Menü
     const selectedIndex = event.target.selectedIndex; // Index der ausgewählten Option
     chrome.storage.sync.set({ 'selectedDropDownOption': { text: selectedText, index: selectedIndex } }); // Speichere den ausgewählten Text und Index in der Storage
-    //clickSpanWithText(selectedText); // Ändere das ausgewählte Span-Element entsprechend der neuen Auswahl
   });
 });
 

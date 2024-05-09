@@ -21,7 +21,6 @@ function clickSpanPeriodically() {
 
 getDataFromIniFile("configurable_parameters",'refresh_time_in_minutes', function(value) {
   if (value !== null) {
-      console.log('Wert aus INI-Datei:', value);
       setInterval(clickSpanPeriodically, parseInt(parseFloat(value)*60000));
       setInterval(getTextFromSpanPeriodically, parseInt(parseFloat(value)*60000-250));
   } else {
