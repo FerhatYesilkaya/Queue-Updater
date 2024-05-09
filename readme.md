@@ -24,7 +24,7 @@ Damit könnt ihr angeben, welche Queue immer neu geladen werden soll. Durch die 
 Hier könnt ihr angeben, wie oft die Queue in Minuten aktualisiert werden soll.
 
 ## Sonstiges
-Es handelt sich hierbei um eine Überganglösung bis eine offizielle Variante zur Verfügung gestellt wird. Ich behalte mir vor dieses Projekt einzustellen oder dauerhaft von GitHub zu löschen. 
+Es handelt sich hierbei um eine Überganglösung bis eine offizielle Variante zur Verfügung gestellt wird. Ich behalte mir vor dieses Projekt einzustellen oder dauerhaft von GitHub zu löschen. Des Weiteren bin ich für den Missbrauch dieser Google Erweiterung nicht verantwortlich.
 
 # [ENGLISH] Queue-Updater Chrome Extension
 
@@ -49,4 +49,4 @@ In the unpacked file, there is another file named `config.ini`, where you can ad
 - `refresh_time_in_minutes`: Here you can specify how often the queue should be updated, in minutes.
 
 ## Miscellaneous
-This is a temporary solution until an official variant is provided. I reserve the right to discontinue this project or permanently delete it from GitHub.
+This is a temporary solution until an official version is made available. I reserve the right to discontinue or permanently delete this project from GitHub. Furthermore, I am not responsible for any misuse of this Google extension.
