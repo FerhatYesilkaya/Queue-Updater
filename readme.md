@@ -13,6 +13,9 @@ Der Queue-Updater ist eine Google Chrome Erweiterung und aktualisiert die Queue 
 7. Die entpackte Datei auswählen
 8. Fertig
 
+## PopUp-Ansicht
+Wenn ihr auf die Erweiterung im Chrome Browser klickt, dann öffnet sich ein PopUp. Dort könnt ihr die Queue auswählen, die aktualisiert werden soll. Der Standard ist: `DACH - Service - IT`
+
 ## Konfigurierbare Parameter
 
 In der entpackten Datei ist eine weitere Datei mit der Bezeichnung `config.ini`, mit dem ihr zwei Parameter anpassen könnt:
@@ -38,6 +41,9 @@ The Queue-Updater is a Google Chrome extension that automatically updates the qu
 6. Click on "Load unpacked" in the top left corner.
 7. Select the unpacked file.
 8. You're done!
+
+## Pop-Up View
+When you click on the extension in the Chrome browser, a pop-up opens. There, you can select the queue that you want to update. The default is: `DACH - Service - IT`.
 
 ## Configurable Parameters
 
