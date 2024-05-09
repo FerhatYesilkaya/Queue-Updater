@@ -18,7 +18,7 @@ Der Queue-Updater ist eine Google Chrome Erweiterung und aktualisiert die Queue 
 In der entpackten Datei ist eine weitere Datei mit der Bezeichnung `config.ini`, mit dem ihr zwei Parameter anpassen könnt:
 
 - `default_queue`
-Damit könnt ihr angeben, welche Queue immer neu geladen werden soll. Durch die PopUp-Ansicht kann man auch zwar die Einstellung vornehmen, aber diese Einstellung greift nur bis zum nächsten Neustart des Rechners.
+Damit könnt ihr angeben, welche Queue immer neu geladen werden soll. Gibt dazu den Namen der Queue ein (muss identisch sein). Durch die PopUp-Ansicht kann man auch zwar die Einstellung vornehmen (Die ersten 8 Queues in der Ausawhlliste von Rexis), aber da diese Einstellung im lokalen Storage gespeichert ist, kann es nicht gewährleistet werden, dass immer die richtige Queue geladen wird.
 
 - `refresh_time_in_minutes`
 Hier könnt ihr angeben, wie oft die Queue in Minuten aktualisiert werden soll.
@@ -45,8 +45,11 @@ The Queue-Updater is a Google Chrome extension that automatically updates the qu
 
 In the unpacked file, there is another file named `config.ini`, where you can adjust two parameters:
 
-- `default_queue`: Specify which queue should always be reloaded. Although you can adjust this setting through the pop-up view, it only persists until the next computer restart.
-- `refresh_time_in_minutes`: Here you can specify how often the queue should be updated, in minutes.
+- `default_queue`
+Specify which queue should always be reloaded. Enter the name of the queue (must be identical). Although you can make this setting through the pop-up view (the first 8 queues in the Rexis selection list), since this setting is stored in local storage, it cannot be guaranteed that the correct queue will always be loaded.
+
+- `refresh_time_in_minutes`
+Here you can specify how often the queue should be updated, in minutes.
 
 ## Miscellaneous
 This is a temporary solution until an official version is made available. I reserve the right to discontinue or permanently delete this project from GitHub. Furthermore, I am not responsible for any misuse of this Google extension.
