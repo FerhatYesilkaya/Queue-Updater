@@ -1,4 +1,4 @@
-chrome.storage.sync.set({ "Timer": 5000 });
+chrome.storage.sync.set({ "Timer": 45000 });
 
 const keepAlive = () => setInterval(chrome.runtime.getPlatformInfo, 20e3);
 chrome.runtime.onStartup.addListener(keepAlive);
@@ -25,7 +25,7 @@ chrome.storage.sync.get("Timer", function(result) {
 });
 
 chrome.storage.sync.get("Timer", function(result) {
-  setInterval(getTextFromSpanPeriodically, result.Timer);
+  setInterval(getTextFromSpanPeriodically, result.Timer-250);
 });
 
 // Funktion zum Klicken auf das definierte Span-Element basierend auf dem empfangenen Index
