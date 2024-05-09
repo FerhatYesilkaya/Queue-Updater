@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +7,53 @@
   <select id="spanDropdown">
     <!-- Optionen werden durch das Skript dynamisch hinzugefügt -->
   </select>
+
+  <form id="timeForm">
+    <div class="radio-container">
+      <input type="radio" id="3min" name="time" value="3" checked> <!-- Hinzugefügt: checked -->
+      <label class="radio-label" for="3min">5 Sekunden</label>
+    </div>
+    <div class="radio-container">
+      <input type="radio" id="5min" name="time" value="5">
+      <label class="radio-label" for="5min">10 Sekunden</label>
+    </div>
+    <div class="radio-container">
+      <input type="radio" id="10min" name="time" value="10">
+      <label class="radio-label" for="10min">15 Sekunden</label>
+    </div>
+  </form>
+
   <script src="popup.js"></script>
+
+  <script>
+    // Radio-Buttons auswählen
+    const timeForm = document.getElementById('timeForm');
+
+    // Event-Listener für Radio-Buttons hinzufügen
+    timeForm.addEventListener('change', function(event) {
+      const selectedMinutes = parseInt(event.target.value); // als Integer konvertieren
+      const selectedMilliseconds = selectedMinutes * 1000; // in Millisekunden umwandeln
+      // Speichern der ausgewählten Zeit in der Chrome-Synchronisierung
+      chrome.storage.sync.set({ 'Timer': selectedMilliseconds });
+    });
+
+    // Beim Laden der Seite, überprüfe, ob eine Zeit in der Chrome-Synchronisierung gespeichert ist
+    document.addEventListener('DOMContentLoaded', function() {
+      chrome.storage.sync.get('Timer', function(data) {
+        const savedMilliseconds = data.selectedMilliseconds;
+        if (savedMilliseconds) {
+          // Die gespeicherte Zeit wieder auswählen
+          const savedMinutes = savedMilliseconds / (60 * 1000); // in Minuten umwandeln
+          const radioBtn = document.getElementById(savedMinutes + 'min');
+          if (radioBtn) {
+            radioBtn.checked = true;
+          }
+        } else {
+          // Wenn keine Zeit gespeichert ist, standardmäßig 3 Minuten auswählen
+          document.getElementById('3min').checked = true;
+        }
+      });
+    });
+  </script>
 </body>
 </html>

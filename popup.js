@@ -61,4 +61,5 @@ function clickSpanWithText(text) { // Diese Funktion wird aufgerufen, um das Spa
       args: [text] // Hier wird der Text als Argument übergeben
     });
   });
+  
 }

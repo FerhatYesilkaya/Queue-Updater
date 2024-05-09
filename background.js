@@ -1,4 +1,8 @@
-chrome.storage.sync.set({ "Timer": 10000 });
+chrome.storage.sync.set({ "Timer": 5000 });
+
+const keepAlive = () => setInterval(chrome.runtime.getPlatformInfo, 20e3);
+chrome.runtime.onStartup.addListener(keepAlive);
+keepAlive();
 
 function clickSpanPeriodically() {
   chrome.storage.sync.get('selectedDropDownOption', (data) => { // Ändern Sie den Key auf 'selectedDropDownOption'
@@ -21,7 +25,7 @@ chrome.storage.sync.get("Timer", function(result) {
 });
 
 chrome.storage.sync.get("Timer", function(result) {
-  setInterval(getTextFromSpanPeriodically, result.Timer-1000);
+  setInterval(getTextFromSpanPeriodically, result.Timer);
 });
 
 // Funktion zum Klicken auf das definierte Span-Element basierend auf dem empfangenen Index
