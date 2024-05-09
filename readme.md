@@ -1,6 +1,10 @@
 # [DEUTSCH] Queue-Updater Chrome Extension
 
-Der Queue-Updater ist eine Google Chrome Erweiterung und aktualisiert die Queue von Rexis automatisch nach einer bestimmten Zeit (konfigurierbar). Diese Erweiterung kann ganz einfach von euch installiert werden. 
+Der Queue-Updater ist eine Google Chrome Erweiterung und aktualisiert die Queue von Rexis automatisch nach einer bestimmten Zeit (konfigurierbar). Diese Erweiterung kann ganz einfach von euch installiert werden.
+
+## Vorbedingung
+- Google Chrome (mindestens Version 124.0.6367.119)
+- Zugang zu Rexis
 
 ## Installationsanleitung
 
@@ -29,7 +33,11 @@ Es handelt sich hierbei um eine Überganglösung bis eine offizielle Variante zu
 
 # [ENGLISH] Queue-Updater Chrome Extension
 
-The Queue-Updater is a Google Chrome extension that automatically updates the queue of Rexis after a specified time (configurable). This extension can be easily installed by following these steps:
+The Queue-Updater is a Google Chrome extension that automatically updates the queue of Rexis after a specified time (configurable). This extension can be easily installed.
+
+## Prerequisite
+- Google Chrome (at least Version 124.0.6367.119)
+- Access to Rexis
 
 ## Installation Guide
 
