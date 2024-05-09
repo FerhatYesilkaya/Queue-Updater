@@ -1,4 +1,4 @@
-chrome.storage.sync.set({ "Timer": 45000 });
+chrome.storage.sync.set({ "Timer": 180000 });
 
 const keepAlive = () => setInterval(chrome.runtime.getPlatformInfo, 20e3);
 chrome.runtime.onStartup.addListener(keepAlive);
