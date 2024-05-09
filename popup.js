@@ -49,14 +49,6 @@ chrome.scripting.executeScript({
   document.getElementById('spanDropdown').addEventListener('change', (event) => {
     const selectedText = event.target.value; // Ausgewählter Text aus dem Dropdown-Menü
     const selectedIndex = event.target.selectedIndex; // Index der ausgewählten Option
-
-    setDataInIniFile("non_configurable_parameters",'manually_selected_view_in_dropdown', selectedText, function(success) {
-      if (success) {
-          console.log('Wert erfolgreich in die INI-Datei geschrieben.');
-      } else {
-          console.error('Fehler beim Schreiben des Werts in die INI-Datei.');
-      }
-  });
     chrome.storage.sync.set({ 'selectedDropDownOption': { text: selectedText, index: selectedIndex } }); // Speichere den ausgewählten Text und Index in der Storage
     //clickSpanWithText(selectedText); // Ändere das ausgewählte Span-Element entsprechend der neuen Auswahl
   });
