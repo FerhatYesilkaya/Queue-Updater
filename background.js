@@ -125,28 +125,3 @@ function getDataFromIniFile(section,key, callback){
     }
   });
 }
-
-
-function writeIniValue(fileUrl="config.ini", section="parameters", key, value, callback) {
-  // Erstelle den INI-Text für den einzelnen Wert
-  const iniText = `[${section}]\n${key} = ${value}\n`;
-
-  // Schreibe den INI-Text in die Datei
-  fetch(fileUrl, {
-      method: 'POST', // Du könntest auch PUT verwenden, wenn du den gesamten Inhalt überschreiben möchtest
-      body: iniText
-  })
-  .then(response => {
-      if (response.ok) {
-          callback(true);
-      } else {
-          console.error('Fehler beim Schreiben des Werts in die INI-Datei:', response.statusText);
-          callback(false);
-      }
-  })
-  .catch(error => {
-      console.error('Fehler beim Schreiben des Werts in die INI-Datei:', error);
-      callback(false);
-  });
-}
-

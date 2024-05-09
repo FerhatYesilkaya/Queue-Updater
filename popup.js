@@ -49,6 +49,14 @@ chrome.scripting.executeScript({
   document.getElementById('spanDropdown').addEventListener('change', (event) => {
     const selectedText = event.target.value; // Ausgewählter Text aus dem Dropdown-Menü
     const selectedIndex = event.target.selectedIndex; // Index der ausgewählten Option
+
+    setDataInIniFile("non_configurable_parameters",'manually_selected_view_in_dropdown', selectedText, function(success) {
+      if (success) {
+          console.log('Wert erfolgreich in die INI-Datei geschrieben.');
+      } else {
+          console.error('Fehler beim Schreiben des Werts in die INI-Datei.');
+      }
+  });
     chrome.storage.sync.set({ 'selectedDropDownOption': { text: selectedText, index: selectedIndex } }); // Speichere den ausgewählten Text und Index in der Storage
     //clickSpanWithText(selectedText); // Ändere das ausgewählte Span-Element entsprechend der neuen Auswahl
   });
@@ -131,29 +139,5 @@ function getDataFromIniFile(section,key, callback){
         console.error('Fehler beim Lesen der INI-Datei.');
         callback(null);
     }
-  });
-}
-
-
-function writeIniValue(fileUrl="config.ini", section, key, value, callback) {
-  // Erstelle den INI-Text für den einzelnen Wert
-  const iniText = `[${section}]\n${key} = ${value}\n`;
-
-  // Schreibe den INI-Text in die Datei
-  fetch(fileUrl, {
-      method: 'POST', // Du könntest auch PUT verwenden, wenn du den gesamten Inhalt überschreiben möchtest
-      body: iniText
-  })
-  .then(response => {
-      if (response.ok) {
-          callback(true);
-      } else {
-          console.error('Fehler beim Schreiben des Werts in die INI-Datei:', response.statusText);
-          callback(false);
-      }
-  })
-  .catch(error => {
-      console.error('Fehler beim Schreiben des Werts in die INI-Datei:', error);
-      callback(false);
   });
 }
