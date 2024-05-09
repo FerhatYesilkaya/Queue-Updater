@@ -7,6 +7,12 @@
     "service_worker": "background.js"
   },
   "action": {
-    "default_popup": "popup.html"
-  }
+    "default_popup": "popup.html",
+    "default_icon": {
+      "128": "images/Roche_Logo.png"
+    }
+  },
+  "host_permissions": [
+    "https://rexis.lightning.force.com/*"
+  ]
 }
