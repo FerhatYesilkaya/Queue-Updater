@@ -15,7 +15,8 @@ Der Queue-Updater ist eine Google Chrome Erweiterung und aktualisiert die Queue 
 5. Vergewissert euch, dass rechts oben "Entwicklermodus" aktiv ist
 6. Links oben auf "Entpackte Erweiterung laden" klicken
 7. Die entpackte Datei auswählen
-8. Fertig
+8. Nachdem dem ersten import der Goolge Erweiterung muss während Rexis geöffnet ist einmal das PopUp geöffnet und die Auswahl geändert werden (auch wenn es schon richtig eingestellt ist). Der Fix dafür ist noch in Arbeit.
+9. Fertig
 
 ## PopUp-Ansicht
 Wenn ihr auf die Erweiterung im Chrome Browser klickt, dann öffnet sich ein PopUp. Dort könnt ihr die Queue auswählen, die aktualisiert werden soll. Der Standard ist: `DACH - Service - IT`
@@ -48,7 +49,8 @@ The Queue-Updater is a Google Chrome extension that automatically updates the qu
 5. Ensure that "Developer mode" is activated in the top right corner.
 6. Click on "Load unpacked" in the top left corner.
 7. Select the unpacked file.
-8. You're done!
+8. After the initial import of the Google extension, once Rexis is open, the pop-up must be opened and the selection changed at least once (even if it's already set correctly). The fix for this issue is still in progress.
+9. You're done!
 
 ## Pop-Up View
 When you click on the extension in the Chrome browser, a pop-up opens. There, you can select the queue that you want to update. The default is: `DACH - Service - IT`.
