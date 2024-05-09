@@ -15,7 +15,7 @@ Der Queue-Updater ist eine Google Chrome Erweiterung und aktualisiert die Queue 
 5. Vergewissert euch, dass rechts oben "Entwicklermodus" aktiv ist
 6. Links oben auf "Entpackte Erweiterung laden" klicken
 7. Die entpackte Datei auswählen
-8. Nachdem dem ersten import der Goolge Erweiterung muss während Rexis geöffnet ist einmal das PopUp geöffnet und die Auswahl geändert werden (auch wenn es schon richtig eingestellt ist). Der Fix dafür ist noch in Arbeit.
+8. Nach dem ersten import der Goolge Erweiterung muss während Rexis geöffnet ist einmal das PopUp geöffnet und die Auswahl geändert werden (auch wenn es schon richtig eingestellt ist). Der Fix dafür ist noch in Arbeit.
 9. Fertig
 
 ## PopUp-Ansicht
