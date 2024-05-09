@@ -9,7 +9,7 @@ chrome.scripting.executeScript({
   const spans = injectionResults[0].result;
   if (spans.length === 0) {
     console.error('No span elements found with the specified class.');
-    alert('Bitte einmal die Ansicht in Rexis wechseln');
+    alert('Bitte einmal die Queue-Auswahlansicht in Rexis wechseln');
     return;
   }
   const dropdown = document.getElementById('spanDropdown');
@@ -23,12 +23,15 @@ chrome.scripting.executeScript({
   // Load selected option from storage
   chrome.storage.sync.get('selectedDropDownOption', (data) => { // 'selectedDropDownOption' verwenden
     const selectedOption = data.selectedDropDownOption;
-
+    if(selectedOption.text !== undefined){
+      dropdown.value = selectedOption.text;
+    }else{
+      
       getDataFromIniFile("configurable_parameters",'default_queue', function(value) {
         console.log(value);
         dropdown.value = value;
       });
-   
+    }
   });
 });
   // Event-Handler für die Änderung des Dropdown-Menüs
@@ -57,7 +60,7 @@ function clickSpanWithText(text) { // Diese Funktion wird aufgerufen, um das Spa
         if (spanToClick) {
           spanToClick.click(); // Klicke auf das Span-Element mit dem angegebenen Text
         } else {
-          console.error('Bitte einmal die Ansicht in Rexis wechseln');
+          console.error('Bitte einmal die Queue-Auswahlansicht in Rexis wechseln');
         }
       },
       args: [text] // Hier wird der Text als Argument übergeben
