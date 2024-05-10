@@ -62,4 +62,4 @@ After parameters have been changed, the Queue-Updater needs to be refreshed. To 
 
 ## Miscellaneous
 
-This is a temporary solution until an official version is made available. I reserve the right to discontinue or permanently delete this project from GitHub. Furthermore, I am not responsible for any misuse of this Google extension.
+This is a temporary solution until an official version is available. I reserve the right to discontinue or permanently delete this project from GitHub. Furthermore, I am not responsible for any misuse of this Google extension.
