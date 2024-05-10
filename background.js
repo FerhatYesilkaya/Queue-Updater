@@ -3,13 +3,17 @@ const keepAlive = () => setInterval(chrome.runtime.getPlatformInfo, 20e3);
 chrome.runtime.onStartup.addListener(keepAlive);
 keepAlive();
 
-function clickSpanPeriodically() {
+//Unnötige Fehlermeldungen werden deaktiviert
+self.addEventListener('unhandledrejection', event => {
+  event.preventDefault();
+});
+
+function clickRefreshButtonPeriodically() {
   chrome.storage.sync.get('default_queue', (data) => { 
     const selectedOption = data.default_queue;
     if (selectedOption !== undefined) {
       chrome.storage.sync.get("currentSelectedView", function (result) {
         for (let i = 0; i < data.default_queue.text.length; i++) {
-          console.log(data.default_queue.text[i]);
           if (result.currentSelectedView === data.default_queue.text[i]) {
             const selectedIndex = selectedOption.index; // Ändern Sie den Namen des Indexattributs entsprechend Ihrer Speicherstruktur
             clickButtonByClass("slds-button.slds-button_icon.slds-button_icon-border-filled"); // Rufen Sie die Funktion zum Klicken auf das Span-Element mit dem ausgewählten Index auf
@@ -22,23 +26,22 @@ function clickSpanPeriodically() {
 }
 
 
-getDataFromIniFile("configurable_parameters", 'default_queue', function (value) {
+getDataFromIniFile("configurable_parameters", 'default_queue', "main",function (value) {
   if (value !== null) {
-    chrome.storage.sync.set({ 'default_queue': { text: value, index: 0 } }); // Speichere den ausgewählten Text und Index in der Storage#
-    console.log(value);
+    chrome.storage.sync.set({ 'default_queue': { text: value, index: 0 } }); // Speichere den ausgewählten Text und Index in der Storage
   } else {
-    console.error('Fehler beim Abrufen des Werts aus der INI-Datei - ' + "background.js - " + "main");
+    console.error('Fehler beim Abrufen des Werts aus der INI-Datei - key: default_queue');
   }
 });
 
 // Periodisches Ausführen der Klickfunktion alle 10 Sekunden
 
-getDataFromIniFile("configurable_parameters", 'refresh_time_in_minutes', function (value) {
+getDataFromIniFile("configurable_parameters", 'refresh_time_in_minutes', "main",function (value) {
   if (value !== null) {
-    setInterval(clickSpanPeriodically, parseInt(parseFloat(value[0]) * 60000));
-    setInterval(getTextFromSpanPeriodically, parseInt(parseFloat(value[0]) * 60000 - 250));
+    setInterval(clickRefreshButtonPeriodically, parseInt(parseFloat(value[0]) * 60000));
+    setInterval(getCurrentQueueTextPeriodically, parseInt(parseFloat(value[0]) * 60000 - 250));
   } else {
-    console.error('Fehler beim Abrufen des Werts aus der INI-Datei - ' + "background.js - " + "main");
+    console.error('Fehler beim Abrufen des Werts aus der INI-Datei - key: refresh_time_in_minutes');
     setInterval(clickSpanPeriodically, 120000);
     setInterval(getTextFromSpanPeriodically, 119900);
   }
@@ -56,7 +59,7 @@ function clickButtonByClass(className) {
           if (button) {
             button.click(); // Klicke auf den Button mit der angegebenen Klasse
           } else {
-            console.error('No button found with the specified class.');
+            console.error('Kein Button mit der angegebenen Klasse: ' +className+ ' gefunden.');
           }
         },
         args: [className]
@@ -64,7 +67,7 @@ function clickButtonByClass(className) {
     });
   });
 }
-function getTextFromSpanPeriodically() {
+function getCurrentQueueTextPeriodically() {
   chrome.tabs.query({}, (tabs) => {
     tabs.forEach((tab) => {
       const tabId = tab.id;
@@ -77,7 +80,7 @@ function getTextFromSpanPeriodically() {
             // Hier können Sie den Text des Span-Elements verwenden oder weitere Verarbeitungen durchführen
             chrome.storage.sync.set({ "currentSelectedView": spanText });
           } else {
-            console.error('Kein Span-Element mit der angegebenen Klasse gefunden.');
+            console.error('Kein Span-Element mit der Klasse '+spanText+' gefunden.');
           }
         }
       });
@@ -129,20 +132,18 @@ function processIniFile(fileUrl, callback) {
       callback(data);
     })
     .catch(error => {
-      console.error('Error reading INI file:', error);
+      console.error('Fehler beim Lesen der INI-Datei:', error);
     });
 }
 
 
 
-function getDataFromIniFile(section, key, callback) {
+function getDataFromIniFile(section, key, functionMessageForLog,callback) {
   processIniFile('config.ini', function (data) {
     if (data) {
-      console.log('INI-Daten erfolgreich gelesen:');
-      console.log(data[section][key]);
       callback(data[section][key]);
     } else {
-      console.error('Fehler beim Lesen der INI-Datei - ' + "getDataFromIniFile");
+      console.error('Fehler beim Lesen der INI-Datei - ' + functionMessageForLog);
     }
   });
 }
