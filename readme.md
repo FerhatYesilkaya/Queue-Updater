@@ -26,7 +26,7 @@ In der entpackten Datei ist eine weitere Datei mit der Bezeichnung `config.ini`,
 
 - `refresh_time_in_minutes (Typ: Nummer)`: Hier könnt ihr angeben, wie oft die Queue in Minuten aktualisiert werden soll. Ganzzahlen oder Fließkommazahlen sind erlaubt. 
 
-Nachdem Parameter umgestellt wurden, muss der Queue-Updater aktualisiert werden. Dafür müsst ihr Schritt 4 befolgen und dort könnt ihr den Queue-Updater sehen. Klickt auf das Refresh-Button.
+Nachdem Parameter umgestellt wurden, muss der Queue-Updater aktualisiert werden. Dafür müsst ihr Schritt 5 befolgen und dort könnt ihr den Queue-Updater sehen. Dort müsst ihr auf das Refresh-Button klicken.
 
 ## Sonstiges
 Es handelt sich hierbei um eine Überganglösung bis eine offizielle Variante zur Verfügung gestellt wird. Ich behalte mir vor dieses Projekt einzustellen oder dauerhaft von GitHub zu löschen. Des Weiteren bin ich für den Missbrauch dieser Google Erweiterung nicht verantwortlich.
@@ -58,7 +58,7 @@ In the unpacked file, there is another file named `config.ini`, where you can ad
 - `default_queue (Type: Text)`: Specify which queue(s) should always be reloaded. Enter the name(s) of the queue(s) (must be identical to Rexis). If you want to update multiple queues, you can separate the names with a comma. Make sure there is no space after the comma.
 - `refresh_time_in_minutes (Type: Number)`: Here you can specify how often the queue should be updated, in minutes. Integers or floating-point numbers are allowed.
 
-After parameters have been changed, the Queue-Updater needs to be refreshed. To do this, follow step 4 and you will see the Queue-Updater there. Click on the refresh button.
+After parameters have been changed, the Queue-Updater needs to be refreshed. To do this, follow step 5 and you will see the Queue-Updater there. Click on the refresh button.
 
 ## Miscellaneous
 
