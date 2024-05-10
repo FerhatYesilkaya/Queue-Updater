@@ -10,7 +10,7 @@ Der Queue-Updater ist eine Google Chrome Erweiterung und aktualisiert die Queue 
 
 1. Ihr müsst dieses Projekt als ZIP-Datei runterladen
 2. Legt die Datei entpackt auf dem Rechner ab, wo ihr es auf jeden Fall nicht löschen könnt. Achtet darauf, dass der Ordner nicht mehrere Unterverzeichnisse hat.
-3. In dieser entpackten Datei ist eine weitere Daten mit dem Namen `config.ini`. Hier könnt ihr zwei Parameter. Mehr Information gibt es unter `Konfugirerbare Parameter`.
+3. In dieser entpackten Datei ist eine weitere Daten mit dem Namen `config.ini`. Hier könnt ihr zwei Parameter anpassen. Mehr Information gibt es unter `Konfugirerbare Parameter`.
 4. Öffnet euer Google Chrome
 5. Klickt rechts oben auf die drei Punkte > Erweiterungen > Erweiterungen verwalten
 6. Vergewissert euch, dass rechts oben "Entwicklermodus" aktiv ist
