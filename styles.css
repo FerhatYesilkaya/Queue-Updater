@@ -6,7 +6,7 @@ body {
   margin: 10px;
   padding: 10px;
   width: 300px;
-  height: 300px;
+  height: 100px;
 }
 
 .error {
@@ -36,39 +36,4 @@ body {
   /* Breite des Logos */
   height: auto;
   /* Automatische Höhe entsprechend dem Seitenverhältnis */
-  margin-bottom: 20px;
-  /* Platz unterhalb des Logos */
-}
-
-/* Label-Stil */
-label {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-/* Dropdown-Stil */
-select#spanDropdown {
-  width: 100%;
-  height: 40px;
-  font-size: 16px;
-  border: 2px solid #ccc;
-  border-radius: 5px;
-  padding: 5px;
-  background-color: #fff;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-}
-
-/* Dropdown-Hover-Effekt */
-select#spanDropdown:hover {
-  border-color: #aaa;
-}
-
-/* Dropdown-Fokus-Effekt */
-select#spanDropdown:focus {
-  outline: none;
-  border-color: #5c9ed9;
-  box-shadow: 0 0 5px rgba(92, 158, 217, 0.5);
 }

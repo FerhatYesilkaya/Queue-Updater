@@ -4,54 +4,66 @@ chrome.runtime.onStartup.addListener(keepAlive);
 keepAlive();
 
 function clickSpanPeriodically() {
-  chrome.storage.sync.get('selectedDropDownOption', (data) => { // Ändern Sie den Key auf 'selectedDropDownOption'
-    const selectedOption = data.selectedDropDownOption;
+  chrome.storage.sync.get('default_queue', (data) => { 
+    const selectedOption = data.default_queue;
     if (selectedOption !== undefined) {
       chrome.storage.sync.get("currentSelectedView", function (result) {
-        if (result.currentSelectedView === data.selectedDropDownOption.text) {
-          const selectedIndex = selectedOption.index; // Ändern Sie den Namen des Indexattributs entsprechend Ihrer Speicherstruktur
-          clickSpanAtIndex(selectedIndex); // Rufen Sie die Funktion zum Klicken auf das Span-Element mit dem ausgewählten Index auf
+        for (let i = 0; i < data.default_queue.text.length; i++) {
+          console.log(data.default_queue.text[i]);
+          if (result.currentSelectedView === data.default_queue.text[i]) {
+            const selectedIndex = selectedOption.index; // Ändern Sie den Namen des Indexattributs entsprechend Ihrer Speicherstruktur
+            clickButtonByClass("slds-button.slds-button_icon.slds-button_icon-border-filled"); // Rufen Sie die Funktion zum Klicken auf das Span-Element mit dem ausgewählten Index auf
+            break;
+          }
         }
       });
     }
   });
 }
 
+
+getDataFromIniFile("configurable_parameters", 'default_queue', function (value) {
+  if (value !== null) {
+    chrome.storage.sync.set({ 'default_queue': { text: value, index: 0 } }); // Speichere den ausgewählten Text und Index in der Storage#
+    console.log(value);
+  } else {
+    console.error('Fehler beim Abrufen des Werts aus der INI-Datei - ' + "background.js - " + "main");
+  }
+});
+
 // Periodisches Ausführen der Klickfunktion alle 10 Sekunden
 
 getDataFromIniFile("configurable_parameters", 'refresh_time_in_minutes', function (value) {
   if (value !== null) {
-    setInterval(clickSpanPeriodically, parseInt(parseFloat(value) * 60000));
-    setInterval(getTextFromSpanPeriodically, parseInt(parseFloat(value) * 60000 - 250));
+    setInterval(clickSpanPeriodically, parseInt(parseFloat(value[0]) * 60000));
+    setInterval(getTextFromSpanPeriodically, parseInt(parseFloat(value[0]) * 60000 - 250));
   } else {
     console.error('Fehler beim Abrufen des Werts aus der INI-Datei - ' + "background.js - " + "main");
-    setInterval(clickSpanPeriodically, 11000);
-    setInterval(getTextFromSpanPeriodically, 10000);
+    setInterval(clickSpanPeriodically, 120000);
+    setInterval(getTextFromSpanPeriodically, 119900);
   }
 });
 
 // Funktion zum Klicken auf das definierte Span-Element basierend auf dem empfangenen Index
-function clickSpanAtIndex(index) {
+function clickButtonByClass(className) {
   chrome.tabs.query({}, (tabs) => {
     tabs.forEach((tab) => {
       const tabId = tab.id;
       chrome.scripting.executeScript({
         target: { tabId: tabId },
-        function: (index) => {
-          const spans = document.querySelectorAll(`span.virtualAutocompleteOptionText`);
-          if (spans.length > index) {
-            spans[index].click(); // Klicke auf das Span-Element mit dem empfangenen Index
+        function: (className) => {
+          const button = document.querySelector(`button.${className}`);
+          if (button) {
+            button.click(); // Klicke auf den Button mit der angegebenen Klasse
           } else {
-            console.error('Invalid index or no span elements found with the specified class.');
+            console.error('No button found with the specified class.');
           }
         },
-        args: [index]
+        args: [className]
       });
     });
   });
-
 }
-
 function getTextFromSpanPeriodically() {
   chrome.tabs.query({}, (tabs) => {
     tabs.forEach((tab) => {
@@ -100,7 +112,16 @@ function processIniFile(fileUrl, callback) {
         const keyValue = line.split('=');
         if (keyValue.length === 2 && currentSection !== null) {
           const key = keyValue[0].trim();
-          const value = keyValue[1].trim();
+          let value = keyValue[1].trim();
+
+          // Check if value contains commas, then split and store as array
+          if (value.includes(',')) {
+            value = value.split(',').map(item => item.trim());
+          } else {
+            // If no commas, store value as an array with one element
+            value = [value];
+          }
+
           data[currentSection][key] = value;
         }
       });
@@ -111,6 +132,7 @@ function processIniFile(fileUrl, callback) {
       console.error('Error reading INI file:', error);
     });
 }
+
 
 
 function getDataFromIniFile(section, key, callback) {

@@ -10,22 +10,19 @@ Der Queue-Updater ist eine Google Chrome Erweiterung und aktualisiert die Queue 
 
 1. Ihr müsst dieses Projekt als ZIP-Datei runterladen
 2. Legt die Datei entpackt auf dem Rechner ab, wo ihr es auf jeden Fall nicht löschen könnt. Achtet darauf, dass der Ordner nicht mehrere Unterverzeichnisse hat.
-3. Öffnet euer Google Chrome
-4. Klickt rechts oben auf die drei Punkte > Erweiterungen > Erweiterungen verwalten
-5. Vergewissert euch, dass rechts oben "Entwicklermodus" aktiv ist
-6. Links oben auf "Entpackte Erweiterung laden" klicken
-7. Die entpackte Datei auswählen
-8. Nach dem ersten import der Goolge Erweiterung muss während Rexis geöffnet ist einmal das PopUp geöffnet und die Auswahl geändert werden (auch wenn es schon richtig eingestellt ist). Der Fix dafür ist noch in Arbeit.
+3. In dieser entpackten Datei ist eine weitere Daten mit dem Namen `config.ini`. Hier könnt ihr zwei Parameter. Mehr Information gibt es unter `Konfugirerbare Parameter`.
+4. Öffnet euer Google Chrome
+5. Klickt rechts oben auf die drei Punkte > Erweiterungen > Erweiterungen verwalten
+6. Vergewissert euch, dass rechts oben "Entwicklermodus" aktiv ist
+7. Links oben auf "Entpackte Erweiterung laden" klicken
+8. Die entpackte Datei auswählen
 9. Fertig
-
-## PopUp-Ansicht
-Wenn ihr auf die Erweiterung im Chrome Browser klickt, dann öffnet sich ein PopUp. Dort könnt ihr die Queue auswählen, die aktualisiert werden soll. Der Standard ist: `DACH - Service - IT`
 
 ## Konfigurierbare Parameter
 
 In der entpackten Datei ist eine weitere Datei mit der Bezeichnung `config.ini`, mit dem ihr zwei Parameter anpassen könnt:
 
-- `default_queue (Typ: Text)`: Damit könnt ihr angeben, welche Queue immer neu geladen werden soll. Gibt dazu den Namen der Queue ein (muss identisch sein). Durch die PopUp-Ansicht kann man auch zwar die Einstellung vornehmen (Die ersten 8 Queues in der Ausawhlliste von Rexis), aber da diese Einstellung im lokalen Storage gespeichert ist, kann es nicht gewährleistet werden, dass immer die richtige Queue geladen wird.
+- `default_queue (Typ: Text)`: Damit könnt ihr angeben, welche Queue immer neu geladen werden soll. Gibt dazu den Namen der Queue ein (muss identisch sein wie in REXIS). Falls ihr mehrere Queues aktualisieren wollt, dann könnt ihr die Namen mit einem `,` trennen. Achtet darauf, dass nach dem Komma kein Leerzeichen ist.
 
 - `refresh_time_in_minutes (Typ: Nummer)`: Hier könnt ihr angeben, wie oft die Queue in Minuten aktualisiert werden soll. Ganzzahlen oder Fließkommazahlen sind erlaubt. 
 
@@ -36,7 +33,7 @@ Es handelt sich hierbei um eine Überganglösung bis eine offizielle Variante zu
 
 # [ENGLISH] Queue-Updater Chrome Extension
 
-The Queue-Updater is a Google Chrome extension that automatically updates the queue of Rexis after a specified time (configurable). This extension can be easily installed.
+The Queue-Updater is a Google Chrome extension that automatically updates the queue of Rexis after a specified time (configurable). This extension can be easily installed by following these steps:
 
 ## Prerequisite
 - Google Chrome (at least Version 124.0.6367.119)
@@ -46,26 +43,23 @@ The Queue-Updater is a Google Chrome extension that automatically updates the qu
 
 1. Download this project as a ZIP file.
 2. Unzip the file and place it on your computer where you won't accidentally delete it. Make sure the folder does not have multiple subdirectories.
-3. Open your Google Chrome browser.
-4. Click on the three dots in the top right corner > Extensions > Manage Extensions.
-5. Ensure that "Developer mode" is activated in the top right corner.
-6. Click on "Load unpacked" in the top left corner.
-7. Select the unpacked file.
-8. After the initial import of the Google extension, once Rexis is open, the pop-up must be opened and the selection changed at least once (even if it's already set correctly). The fix for this issue is still in progress.
+3. In this unpacked file, there is another file named `config.ini`. Here you can configure two parameters. More information is available under `Configurable Parameters`.
+4. Open your Google Chrome browser.
+5. Click on the three dots in the top right corner > Extensions > Manage Extensions.
+6. Ensure that "Developer mode" is activated in the top right corner.
+7. Click on "Load unpacked" in the top left corner.
+8. Select the unpacked file.
 9. You're done!
-
-## Pop-Up View
-When you click on the extension in the Chrome browser, a pop-up opens. There, you can select the queue that you want to update. The default is: `DACH - Service - IT`.
 
 ## Configurable Parameters
 
 In the unpacked file, there is another file named `config.ini`, where you can adjust two parameters:
 
-- `default_queue (Type: Text)`: Specify which queue should always be reloaded. Enter the name of the queue (must be identical). Although you can make this setting through the pop-up view (the first 8 queues in the Rexis selection list), since this setting is stored in local storage, it cannot be guaranteed that the correct queue will always be loaded.
-
+- `default_queue (Type: Text)`: Specify which queue(s) should always be reloaded. Enter the name(s) of the queue(s) (must be identical to Rexis). If you want to update multiple queues, you can separate the names with a comma. Make sure there is no space after the comma.
 - `refresh_time_in_minutes (Type: Number)`: Here you can specify how often the queue should be updated, in minutes. Integers or floating-point numbers are allowed.
 
 After parameters have been changed, the Queue-Updater needs to be refreshed. To do this, follow step 4 and you will see the Queue-Updater there. Click on the refresh button.
 
 ## Miscellaneous
+
 This is a temporary solution until an official version is made available. I reserve the right to discontinue or permanently delete this project from GitHub. Furthermore, I am not responsible for any misuse of this Google extension.
