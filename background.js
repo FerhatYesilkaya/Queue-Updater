@@ -3,9 +3,37 @@ const keepAlive = () => setInterval(chrome.runtime.getPlatformInfo, 20e3);
 chrome.runtime.onStartup.addListener(keepAlive);
 keepAlive();
 
-//Unnötige Fehlermeldungen werden deaktiviert
+// Setze einen Alarm, der alle 15 Minuten ausgelöst wird
+chrome.alarms.create('keepAlive', { periodInMinutes: 15 });
+
+// Füge einen Listener hinzu, der auf den Alarm reagiert
+chrome.alarms.onAlarm.addListener((alarm) => {
+  if (alarm.name === 'keepAlive') {
+    chrome.runtime.getPlatformInfo((info) => {
+      console.log('Platform info fetched to keep the Service Worker alive:', info);
+    });
+  }
+});
+
+const startServiceWorker = () => {
+  console.log('Service Worker started.');
+};
+
+// Listener hinzufügen, um den Service Worker beim Start zu aktivieren
+chrome.runtime.onStartup.addListener(startServiceWorker);
+chrome.runtime.onInstalled.addListener(startServiceWorker);
+startServiceWorker();
+
+// Verhindert das standardmäßige Abfangen von Promise-Fehlern
 self.addEventListener('unhandledrejection', event => {
   event.preventDefault();
+});
+
+// Aktiviert den Service Worker, wenn der Benutzer nicht mehr inaktiv ist
+chrome.idle.onStateChanged.addListener((newState) => {
+  if (newState === 'active') {
+    startServiceWorker();
+  }
 });
 
 function clickRefreshButtonPeriodically() {
