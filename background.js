@@ -42,9 +42,10 @@ function clickRefreshButtonPeriodically() {
     if (selectedOption !== undefined) {
       chrome.storage.sync.get("currentSelectedView", function (result) {
         for (let i = 0; i < data.default_queue.text.length; i++) {
+          console.log(result.currentSelectedView === data.default_queue.text[i]);
           if (result.currentSelectedView === data.default_queue.text[i]) {
             const selectedIndex = selectedOption.index; // Ändern Sie den Namen des Indexattributs entsprechend Ihrer Speicherstruktur
-            clickButtonByClass("slds-button.slds-button_icon.slds-button_icon-border-filled"); // Rufen Sie die Funktion zum Klicken auf das Span-Element mit dem ausgewählten Index auf
+            clickButtonByNameAndType('refreshButton', 'button');
             break;
           }
         }
@@ -75,22 +76,22 @@ getDataFromIniFile("configurable_parameters", 'refresh_time_in_minutes', "main",
   }
 });
 
-// Funktion zum Klicken auf das definierte Span-Element basierend auf dem empfangenen Index
-function clickButtonByClass(className) {
+function clickButtonByNameAndType(buttonName, buttonType) {
   chrome.tabs.query({}, (tabs) => {
     tabs.forEach((tab) => {
       const tabId = tab.id;
       chrome.scripting.executeScript({
         target: { tabId: tabId },
-        function: (className) => {
-          const button = document.querySelector(`button.${className}`);
+        function: (buttonName, buttonType) => {
+          const button = document.querySelector(`button[name="${buttonName}"][type="${buttonType}"]`);
           if (button) {
-            button.click(); // Klicke auf den Button mit der angegebenen Klasse
+            button.click(); // Klicke auf den Button mit dem angegebenen Namen und Typ
+            console.log("Button mit dem Namen: " + buttonName + " und Typ: " + buttonType + " geklickt");
           } else {
-            console.error('Kein Button mit der angegebenen Klasse: ' +className+ ' gefunden.');
+            console.log('Kein Button mit dem Namen: ' + buttonName + ' und Typ: ' + buttonType + ' gefunden.');
           }
         },
-        args: [className]
+        args: [buttonName, buttonType]
       });
     });
   });
@@ -108,7 +109,7 @@ function getCurrentQueueTextPeriodically() {
             // Hier können Sie den Text des Span-Elements verwenden oder weitere Verarbeitungen durchführen
             chrome.storage.sync.set({ "currentSelectedView": spanText });
           } else {
-            console.error('Kein Span-Element mit der Klasse '+spanText+' gefunden.');
+            console.log('Kein Span-Element mit der Klasse '+spanText+' gefunden.');
           }
         }
       });
